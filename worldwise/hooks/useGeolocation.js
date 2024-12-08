@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export function useGeolocation(defaultPosition = null) {
-    const [isLoading, setIsLoading] = useState(false);
-    const [position, setPosition] = useState(defaultPosition);
-    const [error, setError] = useState(null);
+  const [searchParams, setUseSearch] = useSearchParams()
+  const [isLoading, setIsLoading] = useState(false);
+  const [position, setPosition] = useState(defaultPosition);
+  const [error, setError] = useState(null);
+  const mapLat = searchParams.get('lat') ? searchParams.get('lat') : 40
+  const mapLng = searchParams.get('lng') ? searchParams.get('lng') : 40
   
     function getPosition() {
       if (!navigator.geolocation)
