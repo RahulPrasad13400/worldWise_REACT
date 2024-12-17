@@ -1,4 +1,4 @@
-const { createContext, useContext, useReducer } = require("react");
+import { createContext, useContext, useReducer } from "react";
 
 function reducer(state, action){
     switch(action.type){
@@ -9,6 +9,12 @@ function reducer(state, action){
         default:
             throw new Error("Error occured in the fake authentication")
     }
+}
+
+const FAKE_USER = {
+    name : 'Jack',
+    email : 'jack@example.com',
+    password : 'qwerty',
 }
 
 const initialState = {
@@ -40,6 +46,7 @@ function AuthProvider({children}){
 function useAuth(){
     const context = useContext(AuthContext)
     if(context === undefined) throw new Error("Auth context was used outside auth provider")
+    return context
 }
 
 
